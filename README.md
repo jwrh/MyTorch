@@ -4,4 +4,3 @@
 
 Disclaimer: This material is not intended for AIV (Academic Integrity Violation) usages.
 
-<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
