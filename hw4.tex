@@ -1,0 +1,73 @@
+\documentclass{amsart}
+
+
+\title{Matrix theory 21-242 F21: homework 4}
+
+\author{James Cummings}
+
+
+\begin{document}
+
+\maketitle
+    
+Homework due at start of class on Monday 27 September. For the purposes of this HW, an $n \times n$ matrix $A$ is
+{\em invertible} if there exists a matrix $B$ such that $B A = A B = I_n$. If such a $B$ exists it is unique,
+because if $B$ and $B'$ both satisfy the equation then $B = B I_n = B (A B') = (B A) B' = I_n B' = B'$.
+When $A$ is invertible the unique $B$ with $B A = A B = I_n$ is called the {\em inverse of $A$} and is written as $A^{-1}$. 
+
+\begin{enumerate}
+
+\item  Let $A$ and $B$ be  $n \times n$ matrices.
+  Without using determinants, prove that
+  \begin{enumerate}
+  \item If $A$ is invertible, then the transpose $A^T$ of $A$ is invertible and $(A^T)^{-1} = (A^{-1})^T$.  
+  \item $A B$ is invertible if and only if both $A$ and $B$ are invertible.
+  \end{enumerate}  
+
+
+
+\item  Recall that a system of $m$ simultaneous linear equations in $n$ variables $x_1, \ldots x_n$ can be written in the form $A x = b$, where
+  $A$ is an $m \times n$ matrix, $x$ is the column vector with entries the variables $x_1, \ldots x_n$, and $b$ is the column
+  vector containing the right hand sides of the equations.
+  
+  Now let $i, j$ be such that $1 \le i, j \le n$ with $i \neq j$ and let $\lambda$ be a constant. Consider a change of variables for the system to
+  new variables $y_1, \ldots y_n$ where $y_k = x_k$ for $k \neq i$, $y_i = x_i + \lambda x_j$. Show that in the new variables the system
+  can be written $A' y = b$ where $y$ is the column vector with entries $y_1, \ldots y_n$, and  $A'$ is obtained from $A$ by some column operation. 
+  
+\item  Prove that if $A$ is an invertible matrix with integer entries then $A^{-1}$ has rational entries. 
+  
+\item Prove that if $m < n$, $A$ is $m \times n$ and $B$ is $n \times m$ then $B A$ is not invertible. Can
+  $A B$ be invertible for some choice of $A$ and $B$? 
+
+  
+\item Let $p$ be prime and let $F = \{ 0, 1 , \ldots p -1 \}$ with the operations of addition and multiplication modulo $p$.
+  It can be checked (you need not do this) that $F$ satisfies the same arithmetic rules as the real numbers for $+$ and $\times$: $+$ and $\times$ are
+  commutative and associative, $\times$ distributes over $+$, $0$ and $1$ are identities for $+$ and $\times$ respectively,
+  every element has an additive inverse and every nonzero element has a multiplicative inverse. It follows (you need not check this either)
+  that all the theorems we proved so far about real matrices remain true for matrices with entries in $F$.
+
+  \begin{itemize}
+
+  \item Let $p = 7$. Describe a sequence of row operations to put the matrix
+    \[
+    \left (
+    \begin{array}{rr}
+      3 & 4 \\
+      1 & 2 \\
+    \end{array}
+    \right )
+    \]
+    in reduced row echelon form. Determine whether it is invertible, and find its inverse.
+    
+  \item For a general $p$, how many invertible $2 \times 2$ matrices are there with entries in $p$?
+
+  \end{itemize}
+
+  
+\end{enumerate} 
+
+
+   \end{document}
+
+
+
