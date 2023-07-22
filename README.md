@@ -1,1 +1,3 @@
-MyTorch :)
+# MyTorch: a hand-crafted deep learning library with NumPy
+
+This repo implements MyTorch, a deep learning library that does not use PyTorch and only uses NumPy. The purpose of this repo is to make the ideas behind autodifferentiation and backprop clear and concrete (with code). The repo is structured in a modular fashion where a deep learning system is decomposed into multiple modules like `Loss`, `Activation`, `rnn_cell`, etc for clarity. We try to make everything as **vectorized** as possible since unvectorized code are usually slow and inconcise.
