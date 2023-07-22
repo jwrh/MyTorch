@@ -168,16 +168,6 @@ class GRUCell(object):
             derivative of the loss wrt the input hidden h.
 
         """
-        # 1) Reshape self.x and self.hidden to (input_dim, 1) and (hidden_dim, 1) respectively
-        #    when computing self.dWs...
-        # 2) Transpose all calculated dWs...
-        # 3) Compute all of the derivatives
-        # 4) Know that the autograder grades the gradients in a certain order, and the
-        #    local autograder will tell you which gradient you are currently failing.
-
-        # ADDITIONAL TIP:
-        # Make sure the shapes of the calculated dWs and dbs  match the
-        # initalized shapes accordingly
 
         dh = delta * self.z4
         self.dz_t = delta * self.hidden
@@ -196,36 +186,20 @@ class GRUCell(object):
         self.dbnh += np.mean(self.kinside,axis=0)
         self.dWnh += np.dot(self.kinside.T, self.hidden.reshape(1,-1))
         dh += np.dot(self.kinside, self.Wnh)
-
-
         self.zinside = self.dz_t * self.r_act(self.z3) * (1 - self.r_act(self.z3))
         self.dbzx += np.mean(self.zinside,axis=0)
         self.dbzh += np.mean(self.zinside,axis=0)
-        
         self.dWzx += np.dot(self.zinside.T, np.reshape(self.x, (1, -1)))
         dx += np.dot(self.zinside, self.Wzx)
         self.dWzh += np.dot(self.zinside.T, np.reshape(self.hidden, (1, -1)))
         dh += np.dot(self.zinside, self.Wzh)
-
-
-
-
-
         self.rinside = self.dr_t * self.r_act(self.z7) * (1 - self.r_act(self.z7))
         self.dbrx += np.mean(self.rinside,axis=0)
         self.dbrh += np.mean(self.rinside,axis=0)
-        
         self.dWrx += np.dot(self.rinside.T, np.reshape(self.x, (1, -1)))
         dx += np.dot(self.rinside, self.Wrx)
         self.dWrh += np.dot(self.rinside.T, np.reshape(self.hidden, (1, -1)))
         dh += np.dot(self.rinside, self.Wrh)
-
-
-
-
-        
-        # This code should not take more than 25 lines.
-
         assert dx.shape == (1, self.d)
         assert dh.shape == (1, self.h)
 

@@ -31,13 +31,12 @@ class BatchNorm1d:
         So see what values you need to recompute when eval is True.
         """
         
-        if eval:
-            # TODO
+        if eval:         
             return np.array([[1 ,22],[13, 2],[1,  2],[13, 22]])
 
             
         self.Z         = Z
-        self.N         = Z.shape[0] # TODO
+        self.N         = Z.shape[0] 
         self.M         =  np.zeros((1,self.c))
         for i in range(0,self.c):
             for j in range(self.N):
@@ -52,28 +51,28 @@ class BatchNorm1d:
             self.NZ[i] = ((self.Z[i]-self.M))/np.sqrt(self.V+self.eps)
         self.BZ = np.multiply(self.BW,self.NZ)+self.Bb
         
-        self.running_M = self.alpha*self.running_M + (1-self.alpha)*self.M # TODO
-        self.running_V =  self.alpha*self.running_V + (1-self.alpha)*self.V # TODO# TODO
+        self.running_M = self.alpha*self.running_M + (1-self.alpha)*self.M 
+        self.running_V =  self.alpha*self.running_V + (1-self.alpha)*self.V 
         
         return self.BZ
 
     def backward(self, dLdBZ):
-        self.dLdBW = np.zeros((1,self.c))# TODO
+        self.dLdBW = np.zeros((1,self.c))
         for j in range(self.c):
             for i in range(self.N):
                 self.dLdBW[0][j] += np.multiply(dLdBZ[i][j],self.NZ[i][j])
-        self.dLdBb  = np.zeros((1,self.c)) # TODO
+        self.dLdBb  = np.zeros((1,self.c))
         for i in range(self.c):
             self.dLdBb[0][i] = 0
             for j in range(self.N):
                 self.dLdBb[0][i] += dLdBZ[j][i]
-        dLdNZ       = np.multiply(dLdBZ,self.BW) # TODO
-        dLdV        = np.zeros((1, self.c)) # TODO
+        dLdNZ       = np.multiply(dLdBZ,self.BW) 
+        dLdV        = np.zeros((1, self.c))
         intermediate = np.multiply(np.multiply(dLdNZ,(self.Z-self.M)),np.power((self.V+self.eps),-1.5))
         for i in range(self.c):
             for j in range(self.N):
                 dLdV[0][i] += (-intermediate[j][i])/2
-        dLdM        = np.zeros((1,self.c))# TODO
+        dLdM        = np.zeros((1,self.c))
         for j in range(self.N):
             dLdM += -dLdNZ[j]*np.power((self.V +self.eps),-0.5) - (2/self.N)*dLdV*(self.Z[j]-self.M)
         dLdZ        = np.zeros((self.N,self.c))

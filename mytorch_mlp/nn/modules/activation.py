@@ -21,13 +21,13 @@ class Sigmoid:
     
     def forward(self, Z):
     
-        self.A =  1/(1 + np.exp(-Z)) # TODO
+        self.A =  1/(1 + np.exp(-Z)) 
         
         return self.A
     
     def backward(self):
     
-        dAdZ = self.A*(1-self.A) # TODO
+        dAdZ = self.A*(1-self.A) 
         
         return dAdZ
 
@@ -36,13 +36,13 @@ class Tanh:
     
     def forward(self, Z):
     
-        self.A = np.tanh(Z) # TODO
+        self.A = np.tanh(Z) 
         
         return self.A
     
     def backward(self):
     
-        dAdZ = 1 - (self.A**2) # TODO
+        dAdZ = 1 - (self.A**2) 
         
         return dAdZ
 

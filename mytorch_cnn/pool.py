@@ -22,18 +22,12 @@ class MaxPool2d_stride1():
                 for c in range(Z.shape[2]):
                     for d in range(Z.shape[3]):
                         k = A[a,b,c:c+self.kernel,d:d+self.kernel]
-                        # print( np.where(k == np.amax(k)))
                         x = np.where(k == np.amax(k))[0][0]
                         y = np.where(k == np.amax(k))[1][0]
                         self.idx[a,b,c,d,0] = c+x
                         self.idx[a,b,c,d,1] = d+y
-                        # print((x,y),(c,d))
                         Z[a,b,c,d] = np.amax(k)
-        
-
-
-        return Z # four nested loops should be working.
-        # ther np.where(),argmax(),unrave
+        return Z 
     
     def backward(self, dLdZ):
         """
@@ -51,7 +45,6 @@ class MaxPool2d_stride1():
                     for d in range(self.sha[3]):
                         x =self.idx[a,b,c,d][0]
                         y =self.idx[a,b,c,d][1]
-                        # print(type(x),x,type(y),y,(c,d))
                         dLdA[a,b,x,y] += dLdZ[a,b,c,d]
         print(self.sha)
         return dLdA
@@ -109,8 +102,8 @@ class MaxPool2d():
         self.stride = stride
         
         #Create an instance of MaxPool2d_stride1
-        self.maxpool2d_stride1 = MaxPool2d_stride1(kernel)#TODO
-        self.downsample2d = Downsample2d(stride) #TODO
+        self.maxpool2d_stride1 = MaxPool2d_stride1(kernel)
+        self.downsample2d = Downsample2d(stride) 
 
     def forward(self, A):
         """

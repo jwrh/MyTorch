@@ -72,7 +72,7 @@ class RNNCell(object):
         h_prime = self.activation.forward((np.dot(self.W_ih,np.array(x).T)).T
          + self.b_ih 
          + np.dot(self.W_hh,(np.transpose(np.array(h),axes = [1,0]))).T  
-         + self.b_hh) # TODO
+         + self.b_hh) 
 
         return h_prime
         
@@ -105,27 +105,15 @@ class RNNCell(object):
 
         """
         batch_size = delta.shape[0]
-        # 0) Done! Step backward through the tanh activation function.
-        # Note, because of BPTT, we had to externally save the tanh state, and
-        # have modified the tanh activation function to accept an optionally input.
-        dz = self.activation.derivative(h)*delta# TODO
-        # print("h",h.shape)
-        # print("W_ih",self.dW_ih.shape)
-        # print("W_hh",self.dW_hh.shape)
-        # print("b_ih",self.db_ih.shape)
-        # print("b_hh",self.db_hh.shape)
-        # print("h_prev_l",h_prev_l.shape)
-        # print("h_prev_t",h_prev_t.shape)
-        # print("del",dz.shape)
-        # 1) Compute the averaged gradients of the weights and biases
-        self.dW_ih += np.dot(dz.T,h_prev_l)/batch_size # TODO
-        self.dW_hh += np.dot(dz.T,h_prev_t)/batch_size # TODO
-        self.db_ih += np.average(dz, axis=0)  # TODO
-        self.db_hh += np.average(dz, axis=0)  # TODO
+        dz = self.activation.derivative(h)*delta
+        self.dW_ih += np.dot(dz.T,h_prev_l)/batch_size 
+        self.dW_hh += np.dot(dz.T,h_prev_t)/batch_size 
+        self.db_ih += np.average(dz, axis=0)  
+        self.db_hh += np.average(dz, axis=0)  
 
         # # 2) Compute dx, dh
-        dx =  np.dot(dz,self.W_ih) # TODO
-        dh =  np.dot(dz,self.W_hh) # TODO
+        dx =  np.dot(dz,self.W_ih) 
+        dh =  np.dot(dz,self.W_hh) 
 
         # 3) Return dx, dh
         return dx, dh
